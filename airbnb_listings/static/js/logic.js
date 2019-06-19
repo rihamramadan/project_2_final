@@ -21,23 +21,10 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(myMap);
 
-/*
-// Store API query variables
-let baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-let date = "$where=created_date between'2016-01-10T12:00:00' and '2017-01-01T14:00:00'";
-let complaint = "&complaint_type=Rodent";
-let limit = "&$limit=10000";
-
-// Assemble API query URL
-let url = baseURL + date + complaint + limit;
-*/
-
 // Grab the data with d3
-var tableURL = "/api/table_analysis";
+// var CSV = "/api/table_analysis"
 
-d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
-  if (error) throw error;
-  d3.json(tableURL).then(function (response) {
+d3.csv("/Users/rihamramadan/project_2_rr/table_analysis.csv", function(response) {
 
   // Create a new marker cluster group
   let markers = L.markerClusterGroup();
@@ -45,12 +32,6 @@ d3.json("https://d3js.org/us-10m.v1.json", function (error, us) {
   if (response) {
       // Loop through data
       for (let i = 0; i < response.length; i++) {
-
-          // Set the data location property to a variable
-          //var location = response[i].location;
-
-          // Check for location property
-          //if (location) {
           dataItems.push(response[i]);
 
           let popupInfo = "<table>";
@@ -209,28 +190,7 @@ function neighbourhoodselectEventHandler(event) {
 
     // Set the sum of the listings
     listingDiv.innerText = sumOfListimgs;
-
-    // // Set up the legend
-    // let legend = L.control({ position: "bottomright" });
-    // legend.onAdd = function () {
-    //     let div = L.DomUtil.create("div", "legend info");
-
-    //     // LegendInfo room type
-    //     var legendInfo = "<h1>Room Type</h1>" +
-    //         "<div>" +
-    //         "<div class='green' ><h2><b>Entire home/apt</b>: Green</h2></div>" +
-    //         "<div class='red' ><h2><b>Private room</b>: Red</h2></div>" +
-    //         "<div class='orange' ><h2><b>Shared room</b>: Orange</h2></div>" +
-    //         "</div>";
-
-    //     div.innerHTML = legendInfo;
-
-    //     return div;
-    // };
-
-    // // Adding legend to the map
-    // legend.addTo(myMap);
 }
 
-neighbourhoodselect.addEventListener("change", neighbourhoodselectEventHandler);
+neighbourhoodselect.addEventListener("change", neighbourhoodselectEventHandler); 
 
