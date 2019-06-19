@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AirBnb Listings</title>
+
+        <!-- Our CSS -->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!--<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/homepage.css') }}">-->
+        <link rel="stylesheet" href="../static/css/homepage.css" />
+
+
+        <!-- Leaflet JS & CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+            <!-- Marker Cluster JS & CSS -->
+        <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+    </head>
+
+    <body>
+
+        
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">AirBnb Listings</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right"> 
+                        <li>
+                            <a href="project_analysis.html">Project Analysis</a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>    
+        </nav>
+        
+        <div class="jumbotron jumbotron-fluid text-center"> <div id="neighbourhood" class="container"></div>
+        <!-- Drop down panel -->
+
+        <div class="row content">
+            <div class= "row">
+                <div class="col-md-4 text-center">                 
+                    <select class="form-control select_Div" id="neighbourhoodselect">
+                        <option value="Chicago">Chicago</option>
+                        <option value="empty" class="neighbourhood" disabled="disabled">Select neighbourhood</option>
+                        <option value="Albany Park" >Albany Park</option>
+                        <option value="Andersonville">Andersonville</option>
+                        <option value="Archer Heights">Archer Heights</option>
+                        <option value="Armour Square">Armour Square</option>
+                        <option value="Ashburn">Ashburn</option>
+                        <option value="Auburn Gresham">Auburn Gresham</option>
+                        <option value="Austin">Austin</option>
+                        <option value="Avalon Park">Avalon Park</option>
+                        <option value="Avondale">Avondale</option>
+                        <option value="Back of the Yards">Back of the Yards</option>
+                        <option value="Belmont Cragin">Belmont Cragin</option>
+                        <option value="Beverly">Beverly</option>
+                        <option value="Boystown">Boystown</option>
+                        <option value="Bridgeport">Bridgeport</option>
+                        <option value="Brighton Park">Brighton Park</option>
+                        <option value="Bronzeville">Bronzeville</option>
+                        <option value="Bucktown">Bucktown</option>
+                        <option value="Calumet Heights">Calumet Heights</option>
+                        <option value="Chatham">Chatham</option>
+                        <option value="Chinatown">Chinatown</option>
+                        <option value="Clearing">Clearing</option>
+                        <option value="Dunning">Dunning</option>
+                        <option value="East Side">East Side</option>
+                        <option value="Edgewater">Edgewater</option>
+                        <option value="Edison Park">Edison Park</option>
+                        <option value="Englewood">Englewood</option>
+                        <option value="Gage Park">Gage Park</option>
+                        <option value="Galewood">Galewood</option>
+                        <option value="Garfield Park">Garfield Park</option>
+                        <option value="Garfield Ridge">Garfield Ridge</option>
+                        <option value="Gold Coast">Gold Coast</option>
+                        <option value="Grand Crossing">Grand Crossing</option>
+                        <option value="Hegewisch">Hegewisch</option>
+                        <option value="Hermosa">Hermosa</option>
+                        <option value="Humboldt Park">Humboldt Park</option>
+                        <option value="Hyde Park">Hyde Park</option>
+                        <option value="Irving Park">Irving Park</option>
+                        <option value="Jefferson Park">Jefferson Park</option>
+                        <option value="Kenwood">Kenwood</option>
+                        <option value="Lakeview">Lakeview</option>
+                        <option value="Lincoln Park">Lincoln Park</option>
+                        <option value="Lincoln Square">Lincoln Square</option>
+                        <option value="Little Italy/UIC">Little Italy/UIC</option>
+                        <option value="Little Village">Little Village</option>
+                        <option value="Logan Square">Logan Square</option>
+                        <option value="Loop">Loop</option>
+                        <option value="Magnificent Mile">Magnificent Mile</option>
+                        <option value="Marquette Park">Marquette Park</option>
+                        <option value="McKinley Park">McKinley Park</option>
+                        <option value="Montclare">Montclare</option>
+                        <option value="Morgan Park">Morgan Park</option>
+                        <option value="Near North Side">Near North Side</option>
+                        <option value="Near West Side">Near West Side</option>
+                        <option value="North Center">North Center</option>
+                        <option value="North Lawndale">North Lawndale</option>
+                        <option value="North Park">North Park</option>
+                        <option value="Norwood Park">Norwood Park</option>
+                        <option value="Oakland">Oakland</option>
+                        <option value="O'Hare">O'Hare</option>
+                        <option value="Old Town">Old Town</option>
+                        <option value="Pilsen">Pilsen</option>
+                        <option value="Portage Park">Portage Park</option>
+                        <option value="Pullman">Pullman</option>
+                        <option value="River North">River North</option>
+                        <option value="River West">River West</option>
+                        <option value="Rogers Park">Rogers Park</option>
+                        <option value="Roscoe Village">Roscoe Village</option>
+                        <option value="Roseland">Roseland</option>
+                        <option value="Sauganash">Sauganash</option>
+                        <option value="South Chicago">South Chicago</option>
+                        <option value="South Deering">South Deering</option>
+                        <option value="South Loop/Printers Row">South Loop/Printers Row</option>
+                        <option value="South Shore">South Shore</option>
+                        <option value="Streeterville">Streeterville</option>
+                        <option value="Ukrainian Village">Ukrainian Village</option>
+                        <option value="Uptown">Uptown</option>
+                        <option value="Washington Heights">Washington Heights</option>
+                        <option value="Washington Park">Washington Park</option>
+                        <option value="West Elsdon">West Elsdon</option>
+                        <option value="West Lawn">West Lawn</option>
+                        <option value="West Loop/Greektown">West Loop/Greektown</option>
+                        <option value="West Pullman">West Pullman</option>
+                        <option value="West Ridge">West Ridge</option>
+                        <option value="West Town/Noble Square">West Town/Noble Square</option>
+                        <option value="Wicker Park">Wicker Park</option>
+                        <option value="Woodlawn">Woodlawn</option>
+                        <option value="Wrigleyville">Wrigleyville</option>
+                   </select>
+                    <div id="listing" class="listingDiv">
+                        0
+                    </div>
+                    <span class="spanListing">Total AirBnb Listing(s)</span>
+                </div>    
+             <!-- Map -->
+                <div id='map'></div>
+            </div>
+             
+        </div>
+        </div>
+        <!-- <div class="map-container">
+            <div id = "map">Map of Chicago</div>
+        </div> -->
+
+        <!-- <div id="map-container" style="height: 500px">
+            <iframe src="https://maps.google.com/maps?q=chicago&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+              style="border:0" allowfullscreen>
+            </iframe>
+        </div> -->
+
+        <main class=" m-0 p-0">
+            <div class="container-fluid m-0 p-0">
+          
+              <!--Google map-->
+                <div id="map" class="z-depth-1-half map-container-4" style="height: 500px">
+                    <!-- <iframe src="https://www.google.com/maps?q=new+york&um=1&ie=UTF-8&sa=X&ved=0ahUKEwi3uZjWruziAhWmVN8KHZcuD2YQ_AUIESgC" frameborder="0"
+                  style="border:0;width:100%;height:100%;" allowfullscreen></iframe> -->
+                 
+                </div>
+            </div>
+        </main>
+
+        <!-- API key -->
+        <script type="text/javascript" src="../static/js/config.js"></script>
+
+        <!-- Our JavaScript -->
+        <script type="text/javascript" src="../static/js/logic.js"></script>
+        
+
+    </body>
+</html>
