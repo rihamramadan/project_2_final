@@ -22,10 +22,9 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(myMap);
 
 // Grab the data with d3
-// var CSV = "/api/table_analysis"
+var CSV = "/api/table_analysis"
 
-d3.csv("/Users/rihamramadan/project_2_rr/table_analysis.csv", function(response) {
-
+d3.csv(CSV, function(response) {
   // Create a new marker cluster group
   let markers = L.markerClusterGroup();
 

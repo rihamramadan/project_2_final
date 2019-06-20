@@ -5,9 +5,9 @@ let dataItems = [];
 
 // Grab the data with d3
 
-// var CSV = "/api/table_analysis";
+var CSV = "/api/table_analysis";
 
-d3.csv("/Users/rihamramadan/project_2_rr/table_analysis.csv", function(response) {
+d3.csv(CSV, function(response) {
     let totalMonthyPrice = 0.00, totalAvailability_365 = 0, TotalNumberOfReviews = 0,
         TotalReviewScoreRating = 0, TotalReviewsPerMonth = 0.00, TotalMinimumNights = 0, TotalMaximumNights = 0,
         TotalAccomodates = 0;

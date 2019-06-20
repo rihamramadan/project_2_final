@@ -28,7 +28,6 @@ db = SQLAlchemy(app)
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
-
 @app.route("/")
 def home_page():
     return render_template("index.html")
@@ -48,7 +47,7 @@ def getCityDetails():
 @app.route("/api/table_analysis")
 def table_analysis():
     results = pd.read_sql("select * from listings", con=db.engine)
-    csv_results = results.to_csv("table_analysis.csv",index=False)
+    csv_results = results.to_csv()
     return csv_results
      
 if __name__ == "__main__":
