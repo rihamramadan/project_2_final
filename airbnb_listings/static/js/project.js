@@ -5,6 +5,14 @@ let dataItems = [];
 
 // Grab the data with d3
 
+var monthly_price = monthly_price 
+var availability_365 = availability_365
+var number_of_reviews = number_of_reviews
+var review_scores_rating = review_scores_rating
+var reviews_per_month = reviews_per_month
+var minimum_nights
+var maximum_nights
+
 var CSV = "/api/table_analysis";
 
 d3.csv(CSV, function(response) {

@@ -56,15 +56,15 @@ d3.csv(CSV, function(response) {
 
           if (response[i].room_type == "Entire home/apt") {
 
-              icon = new LeafIcon({ iconUrl: '../Resources/green.png' });
+              icon = new LeafIcon({ iconUrl:'/static/js/markers/green.png'});
           }
           else if (response[i].room_type == "Private room") {
 
-              icon = new LeafIcon({ iconUrl: '../Resources/red.png' });
+              icon = new LeafIcon({ iconUrl: '/static/js/markers/red.png' });
           }
           else if (response[i].room_type == "Shared room") {
 
-              icon = new LeafIcon({ iconUrl: '../Resources/orange.png' });
+              icon = new LeafIcon({ iconUrl:'/static/js/markers/orange.png'});
           }
               // Add a new marker to the cluster group and bind a pop-up
           let point = markers.addLayer(L.marker([response[i].latitude, response[i].longitude], { icon: icon })
